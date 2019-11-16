@@ -25,4 +25,3 @@ after_success:
     docker tag "build/$IMAGE_NAME" "$IMAGE_NAME:backend";
     docker push "$IMAGE_NAME:backend";
     sshpass -p "$SERVER_PASSWD" ssh  -o StrictHostKeyChecking=no "$SERVER_USER"@49.235.244.252 "rm -rf Backend/ && git clone https://github.com/TripsPlanner/Backend && cd Backend && git checkout devops && echo -e 'DB_PORT="$DB_PORT"  DB_SERVER="$DB_SERVER" \n DB_PASSWD="$DB_PASSWD" \n DB_USER="$DB_USER" \n ' > .env && source .env && docker-compose up -d";
-
