@@ -1,10 +1,13 @@
 language: ruby
-
+sudo: true
 services:
   - docker
 
 env:
   - IMAGE_NAME=catone/trips_planner
+
+before_install:
+  - sudo apt-get -y install sshpass
 
 script:
   - docker pull "$IMAGE_NAME" || true
@@ -20,3 +23,5 @@ after_success:
     docker tag "build/$IMAGE_NAME" "$IMAGE_NAME:backend";
     docker push "$IMAGE_NAME:backend";
     # TODO: add deployservice part
+    sshpass -p "$SERVER_PASSWD" ssh "$SERVER_USER"@"$SERVER_IP" docker pull "$IMAGE_NAME:backend"
+
