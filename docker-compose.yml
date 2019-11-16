@@ -10,15 +10,15 @@ services:
     networks:
       - trips_planner_net
 
-  # frontend:
-  #   image: catone/trips_planner:frontend
-  #   container_name: trips_planner_frontend
-  #   links:
-  #     - server
-  #   ports:
-  #     - 80:80
-  #   networks:
-  #     - trips_planner_net
+  frontend:
+    image: catone/trips_planner:frontend
+    container_name: trips_planner_frontend
+    links:
+      - server
+    ports:
+      - 80:80
+    networks:
+      - trips_planner_net
 
   # database:
   #   image: mysql:latest
