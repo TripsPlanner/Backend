@@ -14,12 +14,9 @@ script:
       -t "build/$IMAGE_NAME" -f ./Dockerfile .
   - docker run -d -P --name temp "build/$IMAGE_NAME"
   - docker rm -f temp || vitrue
-  - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then 
-      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD_SECURE";
-      docker tag "build/$IMAGE_NAME:backend" "$IMAGE_NAME:backend";
-      docker push "$IMAGE_NAME:backend";
-      # TODO: add deployservice part
-    fi
 
-
-# after_success:
+after_success:
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD_SECURE";
+    docker tag "build/$IMAGE_NAME:backend" "$IMAGE_NAME:backend";
+    docker push "$IMAGE_NAME:backend";
+    # TODO: add deployservice part
