@@ -12,15 +12,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-// const (
-// 	USERNAME = "root"
-// 	PASSWORD = "m?CpS347#H}^"
-// 	NETWORK  = "tcp"
-// 	SERVER   = "49.235.244.252"
-// 	PORT     = 23306
-// 	DATABASE = "tripsPlanner"
-// )
-
 var (
 	USERNAME = os.Getenv("DB_USER")
 	PASSWORD = os.Getenv("DB_PASSWD")
