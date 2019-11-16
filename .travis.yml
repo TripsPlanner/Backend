@@ -4,7 +4,7 @@ services:
   - docker
 
 env:
-  - IMAGE_NAME=catone/trips_planner::backend
+  - IMAGE_NAME=catone/trips_planner
 
 script:
   - docker pull "$IMAGE_NAME" || true
