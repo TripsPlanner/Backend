@@ -1,5 +1,4 @@
 language: ruby
-sudo: true
 services:
   - docker
 
@@ -25,6 +24,5 @@ after_success:
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD_SECURE";
     docker tag "build/$IMAGE_NAME" "$IMAGE_NAME:backend";
     docker push "$IMAGE_NAME:backend";
-    # TODO: add deployservice part
     sshpass -p "$SERVER_PASSWD" ssh "$SERVER_USER"@"$SERVER_IP" docker pull "$IMAGE_NAME:backend"
 
