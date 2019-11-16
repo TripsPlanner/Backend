@@ -4,6 +4,11 @@ services:
   server:
     image: catone/trips_planner:backend
     container_name: trips_planner_backend
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWD: ${DB_PASSWD}
+      DB_SERVER: ${DB_SERVER}
+      DB_PORT: ${DB_PORT}
     ports:
       - 2048:2048
     networks:
