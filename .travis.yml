@@ -12,10 +12,10 @@ script:
   - docker run -d -P --name temp "build/$IMAGE_NAME"
   - docker rm -f temp || vitrue
 
-after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then 
-      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD_SECURE";
-      docker tag "build/$IMAGE_NAME" "$IMAGE_NAME";
-      docker push "$IMAGE_NAME";
-      # TODO: add deployservice part
-    fi
+# after_success:
+#   - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then 
+#       docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD_SECURE";
+#       docker tag "build/$IMAGE_NAME" "$IMAGE_NAME";
+#       docker push "$IMAGE_NAME";
+#       # TODO: add deployservice part
+#     fi
