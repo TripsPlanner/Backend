@@ -1,5 +1,4 @@
 language: ruby
-sudo: true
 services:
   - docker
 
