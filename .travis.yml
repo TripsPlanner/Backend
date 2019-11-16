@@ -3,6 +3,9 @@ language: ruby
 services:
   - docker
 
+env:
+  - IMAGE_NAME=catone/trips_planner::backend
+
 script:
   - docker pull "$IMAGE_NAME" || true
   - docker build --cache-from "$IMAGE_NAME" 
