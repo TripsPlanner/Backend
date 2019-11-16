@@ -1,12 +1,13 @@
 language: ruby
+sudo: true
 services:
   - docker
 
 env:
   - IMAGE_NAME=catone/trips_planner
 
-before_install:
-  - sudo apt-get -y install sshpass
+# before_install:
+#   - sudo apt-get -y install sshpass
 
 script:
   - docker pull "$IMAGE_NAME" || true
