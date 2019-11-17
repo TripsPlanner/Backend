@@ -6,13 +6,11 @@ import (
 )
 
 type Ret struct {
-	X           int
-	Y           int
-	V           int
-	N           string
-	T           string
-	CoordinateX float64
-	CoordinateY float64
+	X int
+	Y int
+	V int
+	N string
+	T string
 }
 
 func RecommandLine(target string, span int) ([]Ret, error) {
@@ -162,21 +160,7 @@ func RecommandLine(target string, span int) ([]Ret, error) {
 
 	log.Printf("res is new%v", res)
 	targetLine := FindTarget(res, span, *data)
-
-	targetLineNew := make([]Ret, 0)
-	datalist, _ := GetJourneyList(target)
-	for _, v := range targetLine {
-		for _, vvv := range *datalist {
-			if v.N == vvv.Destination {
-				v.CoordinateX = vvv.CoordinateX
-				v.CoordinateY = vvv.CoordinateY
-				targetLineNew = append(targetLineNew, v)
-			}
-		}
-	}
-
-	return targetLineNew, nil
-	// return targetLine, nil
+	return targetLine, nil
 
 }
 
@@ -279,5 +263,4 @@ func FindTarget(res []Ret, span int, data []dao.Journey) []Ret {
 
 	log.Printf("ress:%v", ress)
 	return ress
-
 }

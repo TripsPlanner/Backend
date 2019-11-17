@@ -1,12 +1,16 @@
-language: minimal
-sudo: required
-
+language: ruby
 services:
   - docker
 
 env:
-  - IMAGE_NAME=catone/trips_planner::backend
-  
+  - IMAGE_NAME=catone/trips_planner
+
+before_install:
+  - sudo apt-get -y install sshpass
+addons:
+  apt:
+    update: true
+
 script:
   - docker pull "$IMAGE_NAME" || true
   - docker build --cache-from "$IMAGE_NAME" 
@@ -14,12 +18,10 @@ script:
       --build-arg VCS_REF="$TRAVIS_COMMIT" 
       -t "build/$IMAGE_NAME" -f ./Dockerfile .
   - docker run -d -P --name temp "build/$IMAGE_NAME"
-  - docker rm -f temp || true
+  - docker rm -f temp || vitrue
 
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then 
-      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD_SECURE";
-      docker tag "build/$IMAGE_NAME" "$IMAGE_NAME";
-      docker push "$IMAGE_NAME";
-      # TODO: add deployservice part
-    fi
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD_SECURE";
+    docker tag "build/$IMAGE_NAME" "$IMAGE_NAME:backend";
+    docker push "$IMAGE_NAME:backend";
+    sshpass -p "$SERVER_PASSWD" ssh  -o StrictHostKeyChecking=no "$SERVER_USER"@49.235.244.252 "rm -rf Backend/ && git clone https://github.com/TripsPlanner/Backend && cd Backend && git checkout master && docker pull catone/trips_planner:frontend && docker pull catone/trips_planner:backend && echo -e 'DB_PORT="$DB_PORT" \n DB_SERVER="$DB_SERVER" \n DB_PASSWD="$DB_PASSWD" \n DB_USER="$DB_USER" \n ' > .env && source .env && docker-compose down && docker-compose up -d";

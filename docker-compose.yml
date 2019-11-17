@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  server:
+    image: catone/trips_planner:backend
+    container_name: trips_planner_backend
+    env_file: .env
+    ports:
+      - 2048:2048
+    networks:
+      - trips_planner_net
+
+  frontend:
+    image: catone/trips_planner:frontend
+    container_name: trips_planner_frontend
+    links:
+      - server
+    ports:
+      - 80:80
+    networks:
+      - trips_planner_net
+
+  # database:
+  #   image: mysql:latest
+  #   container_name: trips_planner_mysql
+  #   links:
+  #     - server
+  #   ports:
+  #     - 23306:3306
+  #     - 33060:33060
+  #   networks:
+  #     - trips_planner_net
+networks:
+  trips_planner_net:

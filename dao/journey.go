@@ -7,15 +7,15 @@ import (
 
 type Journey struct {
 	ID          int     `json:"id"`
-	Tid         int     `json:"tid"`
+	TID         int     `json:"tid"`
 	Destination string  `json:"destination"` //景点
-	Address     string  `json:"address"`
+	Address     string  `json:"address"`     //地址
 	Favorite    int     `json:"favorite"`    //受欢迎程度
 	Stime       int     `json:"stime"`       //推荐游览时间
 	CoordinateX float64 `json:"coordinateX"` //精度
 	CoordinateY float64 `json:"coordinateY"` //维度
 	City        string  `json:"city"`        //目的地
-	Photo       string  `json:"photo"`
+	Photo       string  `json:"photo"`       //景区图片
 }
 
 func (j *Journey) TableName() string {
@@ -44,15 +44,13 @@ func (j *Journey) GetJourneybyNameDesc(name string) (re *[]Journey, err error) {
 		log.Printf("query Journey by name error:%v", err)
 		return nil, err
 	}
-
-	return re, nil
+  return re, nil
 }
 
 //query by stime
 func (j *Journey) GetJourneybyTime(stime int) (re *[]Journey, err error) {
 	//var j Journey
 	sql := fmt.Sprintf("SELECT * FROM %s WHERE stime = %v", j.TableName(), stime)
-
 	if re, err = querybySql(sql); err != nil {
 		log.Printf("query Journey by name error:%v", err)
 		return nil, err
@@ -75,7 +73,7 @@ func querybySql(sql string) (*[]Journey, error) {
 
 	for rows.Next() {
 		var jo Journey
-		err := rows.Scan(&jo.ID, &jo.Tid, &jo.Destination, &jo.Address, &jo.Favorite, &jo.Stime, &jo.CoordinateX, &jo.CoordinateY, &jo.City, &jo.Photo)
+		err := rows.Scan(&jo.ID, &jo.TID, &jo.Destination, &jo.Address, &jo.Favorite, &jo.Stime, &jo.CoordinateX, &jo.CoordinateY, &jo.City, &jo.Photo)
 		if err != nil {
 			log.Printf("query sql error:%v", err)
 			continue
