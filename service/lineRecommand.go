@@ -164,6 +164,7 @@ func RecommandLine(target string, span int) ([]Ret, error) {
 	targetLine := FindTarget(res, span, *data)
 
 	targetLineNew := make([]Ret, 0)
+
 	datalist, _ := GetJourneyList(target)
 	for _, vvv := range targetLine {
 		for _, vvvvv1 := range *datalist {
@@ -275,6 +276,9 @@ func FindTarget(res []Ret, span int, data []dao.Journey) []Ret {
 			}
 		}
 
+		if len(ress) == len(data) {
+			return ress
+		}
 		//log.Printf("ress222:%v", ress)
 	}
 

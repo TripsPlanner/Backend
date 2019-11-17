@@ -6,8 +6,8 @@ import (
 )
 
 func CalcSapn(startTime string, startStage string, endTime string, endStage string) int {
-	log.Printf("starttime : %v", startTime)
-	log.Printf("endtime : %v", endTime)
+	// log.Printf("starttime : %v", startTime)
+	// log.Printf("endtime : %v", endTime)
 
 	loc, _ := time.LoadLocation("Asia/Shanghai")
 	start, _ := time.ParseInLocation("2006-01-02", startTime, loc)
