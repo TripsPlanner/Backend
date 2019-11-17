@@ -1,8 +1,9 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
 	"gomod/server"
+
+	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
@@ -12,7 +13,7 @@ func InitRouter() *gin.Engine {
 
 	//搜索目的地的景点
 	router.GET("/popular/search", server.JourneyList)
-	//
 	router.GET("/guideline/search", server.GuideRecommand)
+	router.GET("/popular/detail", server.Detail)
 	return router
 }

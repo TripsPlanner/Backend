@@ -263,5 +263,4 @@ func FindTarget(res []Ret, span int, data []dao.Journey) []Ret {
 
 	log.Printf("ress:%v", ress)
 	return ress
-
 }

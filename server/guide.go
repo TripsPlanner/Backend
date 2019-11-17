@@ -26,7 +26,6 @@ func GuideRecommand(c *gin.Context) {
 	}
 
 	JsonResponse(c, 0, "success", re)
-
 }
 
 func JourneyList(c *gin.Context) {
