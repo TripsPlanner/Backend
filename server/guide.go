@@ -25,6 +25,11 @@ func GuideRecommand(c *gin.Context) {
 		return
 	}
 
+	if len(re) == 0 {
+		JsonResponse(c, 10003, "暂无推荐")
+		return
+	}
+
 	JsonResponse(c, 0, "success", re)
 }
 

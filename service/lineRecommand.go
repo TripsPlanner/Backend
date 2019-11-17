@@ -22,6 +22,10 @@ func RecommandLine(target string, span int) ([]Ret, error) {
 		return nil, err
 	}
 
+	if len(*data) == 0 {
+		return nil, nil
+	}
+
 	jourData := *data
 	spanLen := span //4个小时为一个最小单位
 	log.Printf("24 span is :%v", spanLen)
