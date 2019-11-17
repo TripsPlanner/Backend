@@ -10,3 +10,8 @@ func GetJourneyList(name string) (re *[]dao.Journey, err error) {
 	re, err = jo.GetJourneybyName(name)
 	return
 }
+func GetJourneyListbyHot(name string) (re *[]dao.Journey, err error) {
+	var jo dao.Journey
+	re, err = jo.GetJourneybyNameDesc(name)
+	return
+}

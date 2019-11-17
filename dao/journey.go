@@ -22,21 +22,34 @@ func (j *Journey) TableName() string {
 	return "journey"
 }
 
-//Query by name DESC
+//Query by name asc
 func (j *Journey) GetJourneybyName(name string) (re *[]Journey, err error) {
-	sql := fmt.Sprintf("SELECT * FROM %s WHERE  city = '%s' order by favorite desc", j.TableName(), name)
-
+	//sql := fmt.Sprintf("SELECT * FROM %s WHERE  city = '%s' order by favorite desc", j.TableName(), name)
+	sql := fmt.Sprintf("SELECT * FROM %s WHERE  city = '%s' order by favorite asc", j.TableName(), name)
 	log.Printf("%v", sql)
 	if re, err = querybySql(sql); err != nil {
 		log.Printf("query Journey by name error:%v", err)
 		return nil, err
 	}
+
 	return re, nil
+}
+
+//Query by name DESC
+func (j *Journey) GetJourneybyNameDesc(name string) (re *[]Journey, err error) {
+	sql := fmt.Sprintf("SELECT * FROM %s WHERE  city = '%s' order by favorite desc", j.TableName(), name)
+	//sql := fmt.Sprintf("SELECT * FROM %s WHERE  city = '%s' order by favorite asc", j.TableName(), name)
+	log.Printf("%v", sql)
+	if re, err = querybySql(sql); err != nil {
+		log.Printf("query Journey by name error:%v", err)
+		return nil, err
+	}
+  return re, nil
 }
 
 //query by stime
 func (j *Journey) GetJourneybyTime(stime int) (re *[]Journey, err error) {
-	// var j Journey
+	//var j Journey
 	sql := fmt.Sprintf("SELECT * FROM %s WHERE stime = %v", j.TableName(), stime)
 	if re, err = querybySql(sql); err != nil {
 		log.Printf("query Journey by name error:%v", err)
